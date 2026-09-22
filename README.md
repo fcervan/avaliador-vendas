@@ -5,7 +5,7 @@ Padrão: rubrica 4 etapas + LLM-as-judge + LangGraph condicional + early-exit 0.
 
 - Pesos: saudação 0.15 / descoberta 0.30 / apresentação 0.30 / fechamento 0.25
 - Veredito: >=7 aprovado, 5-7 atenção, <5 reprovado
-- LLM: OpenRouter → Ollama Cloud → Groq (ver `src/llm_client.py`, `.env.example`)
+- LLM: Groq → Ollama Cloud → OpenRouter (Groq primeiro, mais rápido — ver `src/llm_client.py`, `.env.example`)
 - Sem mascaramento PII nesta v1 (decisão registrada)
 
 ## Uso local
@@ -16,12 +16,12 @@ pytest tests/ -q
 jupyter notebook notebooks/01_avaliador_vendas.ipynb
 ```
 
-## Uso Colab
+## Uso Colab (HTTPS — SSH não funciona no Colab)
 ```python
-!git clone <url-deste-repo>
+!git clone https://github.com/fcervan/avaliador-vendas.git
 %cd avaliador-vendas
-!pip install -r requirements.txt -q
-# Colab Secrets: OPENROUTER_API_KEY / OLLAMA_CLOUD_API_KEY / GROQ_API_KEY
+# abra notebooks/02_uso_colab.ipynb e dê Run all
+# chaves digitadas via getpass na 1ª célula (nada é versionado)
 ```
 
 ## Estrutura

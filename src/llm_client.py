@@ -1,18 +1,17 @@
-"""Cliente LLM com fallback: OpenRouter -> Ollama Cloud -> Groq."""
+"""Cliente LLM com fallback: Groq -> Ollama Cloud -> OpenRouter (Groq primeiro por latência)."""
 import os
 
 
 def get_llm():
-    """Tenta OpenRouter, depois Ollama Cloud, depois Groq. Erro claro se sem chave."""
-    openrouter_key = os.getenv("OPENROUTER_API_KEY")
-    if openrouter_key:
+    """Tenta Groq, depois Ollama Cloud, depois OpenRouter. Erro claro se sem chave."""
+    groq_key = os.getenv("GROQ_API_KEY")
+    if groq_key:
         try:
-            from langchain_openai import ChatOpenAI
+            from langchain_groq import ChatGroq
 
-            return ChatOpenAI(
-                model=os.getenv("OPENROUTER_MODEL", "openai/gpt-4o-mini"),
-                api_key=openrouter_key,
-                base_url="https://openrouter.ai/api/v1",
+            return ChatGroq(
+                model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
+                api_key=groq_key,
             )
         except Exception:
             pass
@@ -30,19 +29,20 @@ def get_llm():
         except Exception:
             pass
 
-    groq_key = os.getenv("GROQ_API_KEY")
-    if groq_key:
+    openrouter_key = os.getenv("OPENROUTER_API_KEY")
+    if openrouter_key:
         try:
-            from langchain_groq import ChatGroq
+            from langchain_openai import ChatOpenAI
 
-            return ChatGroq(
-                model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
-                api_key=groq_key,
+            return ChatOpenAI(
+                model=os.getenv("OPENROUTER_MODEL", "openai/gpt-4o-mini"),
+                api_key=openrouter_key,
+                base_url="https://openrouter.ai/api/v1",
             )
         except Exception:
             pass
 
     raise RuntimeError(
-        "Nenhuma chave encontrada. Defina OPENROUTER_API_KEY, "
-        "OLLAMA_CLOUD_API_KEY ou GROQ_API_KEY no .env"
+        "Nenhuma chave encontrada. Defina GROQ_API_KEY, "
+        "OLLAMA_CLOUD_API_KEY ou OPENROUTER_API_KEY"
     )
