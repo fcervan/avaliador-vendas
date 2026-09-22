@@ -2,17 +2,33 @@
 import os
 
 
-def get_llm():
+DEFAULTS = {
+    "GROQ_MODEL": "openai/gpt-oss-20b",
+    "OLLAMA_CLOUD_MODEL": "nemotron-3-nano:30b-cloud",
+    "OPENROUTER_MODEL": "google/gemma-4-31b-it",
+}
+
+
+def effective_models() -> dict:
+    """Retorna provedor -> modelo efetivo dado o os.environ atual (sem criar cliente)."""
+    return {
+        "groq": os.getenv("GROQ_MODEL", DEFAULTS["GROQ_MODEL"]),
+        "ollama": os.getenv("OLLAMA_CLOUD_MODEL", DEFAULTS["OLLAMA_CLOUD_MODEL"]),
+        "openrouter": os.getenv("OPENROUTER_MODEL", DEFAULTS["OPENROUTER_MODEL"]),
+    }
+
+
+def get_llm(verbose: bool = True):
     """Tenta Groq, depois Ollama Cloud, depois OpenRouter. Erro claro se sem chave."""
     groq_key = os.getenv("GROQ_API_KEY")
     if groq_key:
         try:
             from langchain_groq import ChatGroq
 
-            return ChatGroq(
-                model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
-                api_key=groq_key,
-            )
+            model = os.getenv("GROQ_MODEL", DEFAULTS["GROQ_MODEL"])
+            if verbose:
+                print(f"LLM: Groq ({model})")
+            return ChatGroq(model=model, api_key=groq_key)
         except Exception:
             pass
 
@@ -21,8 +37,11 @@ def get_llm():
         try:
             from langchain_openai import ChatOpenAI
 
+            model = os.getenv("OLLAMA_CLOUD_MODEL", DEFAULTS["OLLAMA_CLOUD_MODEL"])
+            if verbose:
+                print(f"LLM: Ollama Cloud ({model})")
             return ChatOpenAI(
-                model=os.getenv("OLLAMA_CLOUD_MODEL", "qwen3:32b"),
+                model=model,
                 api_key=ollama_key,
                 base_url="https://ollama.com/v1",
             )
@@ -34,8 +53,11 @@ def get_llm():
         try:
             from langchain_openai import ChatOpenAI
 
+            model = os.getenv("OPENROUTER_MODEL", DEFAULTS["OPENROUTER_MODEL"])
+            if verbose:
+                print(f"LLM: OpenRouter ({model})")
             return ChatOpenAI(
-                model=os.getenv("OPENROUTER_MODEL", "openai/gpt-4o-mini"),
+                model=model,
                 api_key=openrouter_key,
                 base_url="https://openrouter.ai/api/v1",
             )
