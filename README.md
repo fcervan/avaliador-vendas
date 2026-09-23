@@ -11,10 +11,17 @@ Padrão: rubrica 4 etapas + LLM-as-judge + LangGraph condicional + early-exit 0.
 ## Uso local
 ```bash
 pip install -r requirements.txt
-cp .env.example .env  # preencher chaves
+cp .env.example .env  # preencher GROQ_API_KEY (nunca versionar o .env)
 pytest tests/ -q
 jupyter notebook notebooks/01_avaliador_vendas.ipynb
 ```
+
+## Uso local em lote (seu dataset)
+```bash
+python run_local.py --csv data/exemplos.csv --out resultados.csv
+python run_local.py --csv meu_dataset.csv --col transcricao --out saidas/rodada1.csv --limit 3
+```
+Mesmo formato de `data/exemplos.csv` (`id,nivel,transcricao`). Saída com scores 0-10 + final + veredito + feedbacks.
 
 ## Uso Colab (HTTPS — SSH não funciona no Colab)
 ```python
