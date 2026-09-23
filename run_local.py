@@ -17,12 +17,9 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-try:
-    from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-    load_dotenv()
-except ImportError:
-    pass
+load_dotenv()
 
 from src.graph import grade_transcricao  # noqa: E402
 from src.llm_client import get_llm  # noqa: E402
@@ -33,7 +30,9 @@ CRITERIOS = ["saudacao", "descoberta", "apresentacao", "fechamento"]
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Avalia transcrições de vendas em lote.")
     p.add_argument("--csv", required=True, help="CSV de entrada (ex: data/exemplos.csv)")
-    p.add_argument("--col", default="transcricao", help="Coluna com a transcrição (default: transcricao)")
+    p.add_argument(
+        "--col", default="transcricao", help="Coluna com a transcrição (default: transcricao)"
+    )
     p.add_argument("--out", required=True, help="CSV de saída (ex: resultados.csv)")
     p.add_argument("--limit", type=int, default=None, help="Avalia só as N primeiras linhas")
     return p.parse_args()
@@ -82,5 +81,5 @@ def main() -> int:
     return 0
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(main())

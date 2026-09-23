@@ -1,6 +1,6 @@
 """Cliente LLM com fallback: Groq -> Ollama Cloud -> OpenRouter (Groq primeiro por latência)."""
-import os
 
+import os
 
 DEFAULTS = {
     "GROQ_MODEL": "openai/gpt-oss-20b",

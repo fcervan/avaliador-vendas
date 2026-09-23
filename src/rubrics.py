@@ -1,4 +1,5 @@
 """Rubrica genérica 4 etapas — gabarito do script de vendas."""
+
 RUBRICS = {
     "saudacao": (
         "Saudação/Rapport: cumprimenta, se apresenta (nome/empresa), "

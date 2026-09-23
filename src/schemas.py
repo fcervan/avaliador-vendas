@@ -1,4 +1,5 @@
 """Schemas do Avaliador de Vendas — espelha avaliador_de_redacao.ipynb State."""
+
 from typing import TypedDict
 
 

@@ -3,3 +3,8 @@ __pycache__/
 .env
 .ipynb_checkpoints/
 *.pyc
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+saidas/

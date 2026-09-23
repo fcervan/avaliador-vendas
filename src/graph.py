@@ -1,14 +1,11 @@
 """Grafo LangGraph com early-exit 0.5 — porta do avaliador_de_redacao."""
+
 from functools import partial
 
 from langgraph.graph import END, StateGraph
 
-try:
-    from . import evaluators as ev
-    from .schemas import THRESHOLD, SalesState
-except ImportError:
-    import evaluators as ev
-    from schemas import THRESHOLD, SalesState
+from . import evaluators as ev
+from .schemas import THRESHOLD, SalesState
 
 
 def build_graph(llm):

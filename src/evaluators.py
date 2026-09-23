@@ -1,12 +1,10 @@
 """Nós avaliadores — mesmo padrão do avaliador_de_redacao: prompt Pontuação + regex."""
+
 import re
 
 from langchain_core.prompts import ChatPromptTemplate
 
-try:
-    from .rubrics import RUBRICS
-except ImportError:
-    from rubrics import RUBRICS
+from .rubrics import RUBRICS
 
 
 def extract_score(content: str) -> float:
@@ -62,10 +60,7 @@ def check_fechamento(state, llm):
 
 
 def calculate_final(state):
-    try:
-        from .schemas import PESOS, veredito
-    except ImportError:
-        from schemas import PESOS, veredito
+    from .schemas import PESOS, veredito  # import local: evita ciclo
 
     final01 = (
         state.get("saudacao_score", 0.0) * PESOS["saudacao"]

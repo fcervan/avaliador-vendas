@@ -1,0 +1,19 @@
+[project]
+name = "avaliador-vendas"
+version = "1.0.0"
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.coverage.run]
+source = ["src", "run_local"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
