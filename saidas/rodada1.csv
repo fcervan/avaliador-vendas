@@ -1,0 +1,10 @@
+id,nivel,saudacao,descoberta,apresentacao,fechamento,final,veredito,feedback_saudacao,feedback_descoberta,feedback_apresentacao,feedback_fechamento
+bom,bom,10.0,8.5,9.0,9.5,9.12,aprovado,"Cumprimento cordial, apresentação clara e conexão contextual, demonstra atenção ao cliente.  
+Excelente rapport, atende totalmente os critérios da rubrica.","Você fez perguntas abertas que cobrem necessidade, dor, contexto, decisor e prazo, demonstrando boa escuta antes de apresentar a solução.  
+Seria interessante incluir uma pergunta sobre orçamento antes de ofertar, garantindo alinhamento financeiro desde o início.","Você conectou bem a solução ao problema, destacando o benefício (redução de tempo de resposta) antes da feature e trouxe prova de 40% de corte em outro cliente.  
+Para melhorar, aprofunde a prova e responda a objeções de preço com dados de ROI ou opções de pagamento, mantendo a abordagem sem pressão.","O vendedor resume bem o valor (redução de 40% no tempo de resposta) e propõe um próximo passo claro com prazo específico (enviar proposta amanhã às 10h e agendar 15 min de revisão).  
+Apenas reforçar a confirmação de aceitação com uma frase mais explícita (“Você confirma que pode receber a proposta amanhã às 10h?”) para garantir total alinhamento."
+medio,medio,4.0,0.0,0.0,0.0,0.6,reprovado,"Cumprimento e introdução da empresa foram feitos, mas faltou nome próprio e conexão com o contexto do cliente.  
+O tom é cordial, porém informal; poderia ser mais profissional e incluir o nome do cliente para fortalecer a ligação.",,,
+ruim,ruim,1.0,0.0,0.0,0.0,0.15,reprovado,"O vendedor inicia a conversa de forma informal e não apresenta seu nome nem a empresa, faltando a formalidade esperada.  
+Ele também não faz nenhuma referência ao cliente ou ao contexto, prejudicando a construção de rapport.",,,

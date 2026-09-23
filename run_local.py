@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 
-sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 try:
     from dotenv import load_dotenv
@@ -24,8 +24,8 @@ try:
 except ImportError:
     pass
 
-from graph import grade_transcricao  # noqa: E402
-from llm_client import get_llm  # noqa: E402
+from src.graph import grade_transcricao  # noqa: E402
+from src.llm_client import get_llm  # noqa: E402
 
 CRITERIOS = ["saudacao", "descoberta", "apresentacao", "fechamento"]
 
