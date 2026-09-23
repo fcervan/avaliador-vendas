@@ -4,5 +4,6 @@ langchain-openai
 langchain-groq
 python-dotenv
 pandas
+matplotlib
 pytest
 jupyter
